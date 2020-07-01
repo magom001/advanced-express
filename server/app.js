@@ -1,4 +1,5 @@
 const express = require("express");
+const helmet = require("helmet");
 const path = require("path");
 const createError = require("http-errors");
 const mongoose = require("mongoose");
@@ -15,6 +16,12 @@ const AvatarService = require("./services/AvatarService");
 
 module.exports = (config) => {
   const app = express();
+
+  /**
+   * @see https://github.com/helmetjs/helmet
+   * Helmet adds security features
+   */
+  app.use(helmet());
 
   app.use(compression());
 
