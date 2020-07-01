@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const createError = require("http-errors");
 const mongoose = require("mongoose");
+const compression = require("compression");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const MongoStore = require("connect-mongo")(session);
@@ -14,6 +15,9 @@ const AvatarService = require("./services/AvatarService");
 
 module.exports = (config) => {
   const app = express();
+
+  app.use(compression());
+
   const speakers = new SpeakerService(config.data.speakers);
   const feedback = new FeedbackService(config.data.feedback);
   const avatars = new AvatarService(config.data.avatars);
